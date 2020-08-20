@@ -49,7 +49,7 @@ export class ProductComponent {
         return this.model.getProduct(key);
     }
     getProducts(): Product[] {
-        this.model.getProducts();
+        return this.model.getProducts();
     }
     getProductCount(): number {
         return this.getProducts().length;
