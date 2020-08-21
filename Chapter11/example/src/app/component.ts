@@ -8,13 +8,14 @@ import { Product } from './product.model';
 })
 export class ProductComponent {
     model: Model = new Model();
-    fontSizeWithUnits: string = '30px';
-    fontSizeWithoutUnits: string = '30';
-    targetName: string = "Kayak";
+    fontSizeWithUnits = '30px';
+    fontSizeWithoutUnits = '30';
+    targetName = 'Kayak';
+    counter: number = 1;
 
     constructor(ref: ApplicationRef) {
-        (<any>window).appRef = ref;
-        (<any>window).model = this.model;
+        ( window as any).appRef = ref;
+        ( window as any).model = this.model;
     }
     getClasses(key: number): string {
         const product = this.model.getProduct(key);
@@ -30,7 +31,7 @@ export class ProductComponent {
         };
     }
     getStyles(key: number) {
-        let product = this.model.getProduct(key);
+        const product = this.model.getProduct(key);
 
         return {
             fontSize: '30px',
@@ -42,7 +43,7 @@ export class ProductComponent {
         return this.model.getProducts()[position];
     }
     getClassesByPosition(position: number): string {
-        let product = this.getProductByPosition(position);
+        const product = this.getProductByPosition(position);
         return 'p-2' + (product.price < 50 ? 'bg-info' : 'bg-warning');
     }
     getProduct(key: number): Product {
@@ -52,8 +53,16 @@ export class ProductComponent {
         return this.model.getProducts();
     }
     getProductCount(): number {
+        console.log('getProductCount invoked.');
         return this.getProducts().length;
     }
-
-
+    getKey(index: number, product: Product) {
+        return product.id;
+    }
+    get nextProduct(): Product{
+        return this.model.getProducts().shift();
+    }
+    getProductPrice(index: number): number{
+        return Math.floor(this.getProduct(index).price);
+    }
 }
