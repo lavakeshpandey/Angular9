@@ -12,6 +12,7 @@ export class ProductComponent {
     fontSizeWithoutUnits = '30';
     targetName = 'Kayak';
     counter: number = 1;
+    selectedProduct: string;
 
     constructor(ref: ApplicationRef) {
         ( window as any).appRef = ref;
@@ -64,5 +65,8 @@ export class ProductComponent {
     }
     getProductPrice(index: number): number{
         return Math.floor(this.getProduct(index).price);
+    }
+    getSelected(product: Product): boolean {
+        return product.name == this.selectedProduct;
     }
 }
